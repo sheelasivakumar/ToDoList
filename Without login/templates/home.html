@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDo List</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background:url("/static/Untitled\ design\ \(1\).png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            margin: 20px;
+        }
+
+        /* Common style for labels and input text */
+        input[type="text"] {
+            display: block;
+            height: 40px;
+            width: 400px;
+            margin-bottom: 20px;
+            border:0.5px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.795);
+        }
+
+        /* Header styles */
+        header {
+            background: black;
+            color: white;
+            padding: 40px;
+            text-align: left;
+            font-size: 30PX;
+            margin-bottom: 60px;
+        }
+        
+        ul{
+            list-style-type: none;
+        }
+
+        /* SECTION 1 */
+        .section1-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.545);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section1-label-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding-bottom: 40px;
+            /* Align labels to the bottom of the container */
+        }
+
+        .section1-input-container {
+            margin-left: 20px;
+        }
+
+        /* Submit button style */
+        input[type="submit"] {
+            height: 40px;
+            width: 100px;
+            background-color: #ffffff;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 300px;
+        }
+
+        /* SECTION 2 */
+        .section2-grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 50px;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 50px;
+        }
+
+        .section2-grid-item {
+            height: 100px;
+            border: 1px solid black ;
+            border-radius: 5px;
+            padding: 20px;
+            font-size: 20px;
+            margin-left: 20px;     
+            text-align: center;
+        }
+
+        /* SECTION 3 */
+        .section3-container {
+            background:  rgba(255, 255, 255, 0.545);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .section3-square-input {
+            width: 150PX;
+            height: 150px; /* Square size */
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            background: white;
+            margin-top: 10px;
+            float: left;
+        }
+
+        .section3-top-section {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .section3-fixed-width-input {
+            width: 1400px;
+            height: 70px;
+            border: 1px solid #ccc;
+            text-align: left;
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 10px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+
+        .section3-bottom-section {
+            display: flex;
+            align-items: flex-start;
+            margin-left: 20px;
+        }
+
+        .section3-small-input {
+            border: 2px solid #ccc;
+            width: 220px;
+            height: 40px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+    .notCompleteButton {
+      background-color: black;
+      border: none;
+      color: white;
+      padding: 8px 25px;
+      text-align: center;
+      text-decoration: none;border-radius: 5px;
+      margin-right: 10px;
+      width: 200px;
+      height: 40px;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 2px;
+    }
+    .CompleteButton{
+      background-color: green;
+      border: none;
+      color:white;
+      padding: 8px 25px;
+      text-align: center;
+      text-decoration: none;border-radius: 5px;
+      margin-right: 10px;
+      width: 200px;
+      height: 40px;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 2px;
+    }
+    .deleteButton {
+      background-color: #f44336;
+      border: none;
+      color: white;
+      padding: 13px 32px;
+      height: 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5%;
+    }
+    .updateButton {
+      background-color: #522B5B;
+      border: none;
+      color: white;
+      padding: 13px 32px;
+      height: 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5%;
+      margin-right:20px;
+    }
+    .addtask{
+        background-color:#32d9cb;
+        border: none;
+      color: white;
+      padding: 13px 32px;
+      height: 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5%;
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        ToDo List
+    </header>
+
+    <!-- SECTION 1 -->
+    <h2>Add Task</h2>
+    <div class="section1-container">
+        <form action="/add" method="post">
+            <input type="text" id="title" name="title" placeholder="Enter Task....">
+            <br>
+            <input type="text" id="description" name="description" placeholder="Enter Description...." required>
+            <br>
+            <button type="submit" class="addtask">Add Task</button>
+       </form>
+    </div>
+    
+    <!-- SECTION 2 -->
+    <h2>Statistics</h2>
+    <div class="section2-grid-container">
+        <div class="section2-grid-item" style="background-color:white;"> 
+            <h3>Total Task</h3><p class="text-center">{{total_todo}}</p></div>
+        <div class="section2-grid-item" style="background-color: white;"><h6>Completed</h6>
+            <p class="text-center">{{ completed_todo }}</p></div>
+        <div class="section2-grid-item" style="background-color: white;"><h6>Uncompleted</h6>
+            <p class="text-center">{{ uncompleted }}</p></div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <ul>
+     {% for task in tasks %}
+    <div class="section3-container">
+        <div class="section3-top-section">     
+            <li class="section3-fixed-width-input" >{{ task[1] }} - {{ task[2] }} 
+            </li>
+        </div> 
+        <div class="section3-bottom-section">
+            <li >
+                {% if task[3] == 0 %}
+                <span class="notCompleteButton">Not Complete</span>
+                {% else %}
+                <span class="CompleteButton">Completed</span>
+               {% endif %}
+            </li>
+            <li >
+                <a href="/complete/{{ task[0] }}"><button class="updateButton" type="submit">Update</button></a>
+            </li>
+            <li >
+                <a href="/delete/{{ task[0] }}"><button class="deleteButton" type="submit">Delete</button></a>
+            </li>
+        </div>
+        <div class="clear"></div>
+    </div>    
+    {% endfor %}
+</ul>
+    
+   
+</body>
+</html>
