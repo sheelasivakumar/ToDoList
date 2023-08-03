@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+        }
+        .centerit{
+            width: 400px;
+            height: 400px;
+            text-align: left;
+            margin: auto;
+            border: 1px solid #32d9cb9f ;
+            padding: 30px;
+            border-radius: 2%;
+        }
+        .form-group{
+            margin-top: 10px;
+            margin-left: 40px;
+            padding: 10px;
+        }
+        .btn-btn-primary{
+            height: 30px;
+            width: 50px;
+            border: None;
+            background-color: #32d9cb;
+            color: white;
+        }
+        header {
+            color: #32d9cb;
+            padding: 40px;
+            text-align: center;
+            font-size: 40PX;
+            margin-bottom: 60px;
+        }
+        label{
+            color:white;
+        }
+        .head-login{
+            color:white;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        input{
+            margin-top: 10px;
+            margin-left: 15px;
+            padding: 2px;
+            height: 25px;
+        }
+        p{
+            margin-top: 10px;
+            color: white;
+        }
+        .btn-btn-primary-btn-sm{
+            text-decoration: none;
+            color: #32d9cb;
+        }
+        .centermsg{
+            align-items: center;
+            text-align: center;
+            color:#32d9cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Write it, prioritize it, accomplish it
+        
+    </header>
+    <div class="centerit">
+        <h2 class="head-login">LOGIN PAGE</h2>
+        {% with messages = get_flashed_messages()%}
+        {%if messages%}
+        {%for msg in messages %}
+        <div class="centermsg">
+         <p>{{msg}}</p>
+        </div>
+        {%endfor%}
+        {%endif%}
+       {%endwith%}
+    <form action="/login" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label><br>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="username" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label><br>
+          <input type="password" class="form-control"  name="password" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group form-check">
+        <button type="submit" class="btn-btn-primary">Login</button>
+      </form>
+      <br/>
+      <p>Don't have an account? <a href="/register" class="btn-btn-primary-btn-sm">  Register Now</a></p>
+      </div>
+</body>
+</html>
