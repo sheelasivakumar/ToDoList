@@ -56,11 +56,14 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
 
-        register_user(username,password)
-        flash("Registration successful. You can now log in.", "success")
-        return redirect(url_for("index"))
+        try:
+            register_user(username,password)
+            flash("Registration successful. You can now log in.", "success")
+            return redirect(url_for("index"))
+        except:
+            flash("User already Exits")
+            return redirect(url_for("index"))
     else:
-        flash
         return render_template("register.html")
 
 # Login Page Action 
